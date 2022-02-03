@@ -7,12 +7,18 @@ import androidx.core.app.ActivityCompat;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     //Second step: Declare the location manager and location listener
     LocationManager locationManager;
     LocationListener locationListener;
+
 
 
     @Override
@@ -43,11 +50,28 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onLocationChanged(@NonNull Location location) {
                 Log.d(TAG, "LocationChanged: " + location);
+
                 longitudeTV.setText(location.getLongitude()+"");
                 latitudeTV.setText(location.getLatitude()+"");
                 altitudeTV.setText(location.getAltitude()+"");
                 accuracyTV.setText(location.getAccuracy()+"");
-                //addressTV.setText()
+
+                double lon = location.getLongitude();
+                double lat = location.getLatitude();
+
+//                if (location != null) {
+//                    //To convert latitude and longitude to address
+//                    Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+//
+//                    try {
+//                        List<Address> addressList = geocoder.getFromLocation(lon, lat, 1);
+//                        addressTV.setText(addressList.get(0).getAddressLine(0));
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+
+
             }
         };
 
@@ -58,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     ;
+
 
 //Fourth Step - after granting or denying the permission, this method is called
 
